@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Angela Ang</title>
-    </head>
-    <body>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/cv">CV</a></li>
-                <li><a href="/blog">Blog</a></li>
-            </ul>
-        </nav>
-        <div class="container">
-            <div class="blurb">
-                <h1>Hi there, I'm Angela!</h1>
-                <p>I'm a Year 3 <em>Business Analytics Student</em> from the National University of Singapore <a href="/about">Learn more about me here!</a></p>
-            </div><!-- /.blurb -->
-        </div><!-- /.container -->
-        <footer>
-            <ul>
-                <li><a href="mailto:a.anghs22@gmail.com">email</a></li>
-                <li><a href="https://github.com/aanghs22">github.com/aanghs22</a></li>
-            </ul>
-        </footer>
-    </body>
+<head>
+    <title>Angela Ang</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+    <script>
+        // Function to fetch and render Markdown content
+        function fetchAndRenderMarkdown(url, containerId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(markdown => {
+                    const converter = new showdown.Converter();
+                    const html = converter.makeHtml(markdown);
+                    document.getElementById(containerId).innerHTML = html;
+                });
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about" onclick="fetchAndRenderMarkdown('/about.md', 'content')">About</a></li>
+            <li><a href="/cv" onclick="fetchAndRenderMarkdown('/cv.md', 'content')">CV</a></li>
+            <li><a href="/blog" onclick="fetchAndRenderMarkdown('/blog.md', 'content')">Blog</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div id="content" class="blurb">
+            <h1>Hi there, I'm Angela!</h1>
+            <p>I'm a Final Year <em>Business Analytics Student</em> from the National University of Singapore <a href="/about">Learn more about me here!</a></p>
+        </div><!-- /.blurb -->
+    </div><!-- /.container -->
+    <footer>
+        <ul>
+            <li><a href="mailto:a.anghs22@gmail.com">email</a></li>
+            <li><a href="https://github.com/aanghs22">github.com/aanghs22</a></li>
+        </ul>
+    </footer>
+
+    <!-- Initial content loading (home) -->
+    <script>
+        fetchAndRenderMarkdown('/about.md', 'content');
+    </script>
+</body>
 </html>
